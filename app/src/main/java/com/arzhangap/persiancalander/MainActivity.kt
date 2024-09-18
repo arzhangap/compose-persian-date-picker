@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -17,7 +16,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.arzhangap.persiancalander.ui.theme.PersianCalanderTheme
-import ir.huri.jcal.JalaliCalendar
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,23 +24,20 @@ class MainActivity : ComponentActivity() {
         setContent {
             PersianCalanderTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    val currentDate = JalaliCalendar()
-                    var selectedDate by remember { mutableStateOf(PersianDate(currentDate.year,currentDate.month,currentDate.day)) }
+                    val calenderState = rememberPersianDatePickerState()
                     var openDialog by remember {
                         mutableStateOf(false)
                     }
-                    var chosenDate: PersianDate? by remember { mutableStateOf(null) }
+                    var date: PersianDate? by remember { mutableStateOf(null) }
 
                     if (openDialog) {
                         PersianDatePicker(
+                            persianDatePickerState = calenderState,
                             onDismissRequest = { openDialog = false },
                             onConfirmation = {
                                 openDialog = false
-                                chosenDate = selectedDate
-                                             },
-                            onDayClicked = {selectedDate = it},
-                            selectedDate = selectedDate,
-                            chosenDate = chosenDate
+                                date = it
+                            }
                         )
                     }
                     Column(
@@ -51,8 +46,8 @@ class MainActivity : ComponentActivity() {
                         Button(onClick = { openDialog = !openDialog }) {
                             Text(text = "Open")
                         }
-                        if(chosenDate != null) {
-                            Text(text = "${chosenDate!!.year}/${chosenDate!!.month}/${chosenDate!!.day}")
+                        if (date != null) {
+                            Text(text = "${date!!.year}/${date!!.month}/${date!!.day}")
                         }
                     }
                 }
@@ -65,5 +60,5 @@ class MainActivity : ComponentActivity() {
 data class PersianDate(
     val year: Int,
     val month: Int,
-    val day:Int
+    val day: Int
 )
