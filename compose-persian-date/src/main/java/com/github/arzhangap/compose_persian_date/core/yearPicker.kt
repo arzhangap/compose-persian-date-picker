@@ -71,7 +71,7 @@ fun YearPicker(
                 } else {
                     // easter egg
                     Text(
-                        text = stringResource(R.string.easter_egg),
+                        text = "به جای اینکارا کتاب بخون :)",
                         fontSize = 18.sp,
                         color = textColor,
                     )
