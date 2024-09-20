@@ -4,18 +4,25 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import com.arzhangap.persiancalander.ui.theme.PersianCalanderTheme
+import com.github.arzhangap.compose_persian_date.core.PersianDatePicker
+import com.github.arzhangap.compose_persian_date.util.state.rememberPersianDatePickerState
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,30 +31,39 @@ class MainActivity : ComponentActivity() {
         setContent {
             PersianCalanderTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    // remember state for date picker
                     val calenderState = rememberPersianDatePickerState()
-                    var openDialog by remember {
-                        mutableStateOf(false)
-                    }
-                    var date: PersianDate? by remember { mutableStateOf(null) }
 
-                    if (openDialog) {
-                        PersianDatePicker(
-                            persianDatePickerState = calenderState,
-                            onDismissRequest = { openDialog = false },
-                            onConfirmation = {
-                                openDialog = false
-                                date = it
-                            }
-                        )
-                    }
+                    PersianDatePicker(persianDatePickerState = calenderState)
+
+
                     Column(
-                        Modifier.padding(innerPadding)
+                        Modifier
+                            .padding(innerPadding)
+                            .fillMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
                     ) {
-                        Button(onClick = { openDialog = !openDialog }) {
+                        Button(onClick = { calenderState.toggleDialog()}) {
                             Text(text = "Open")
                         }
-                        if (date != null) {
-                            Text(text = "${date!!.year}/${date!!.month}/${date!!.day}")
+                        Row(
+                           modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            if(calenderState.chosenDate!=null){
+                                // clear state
+                                IconButton(onClick = { calenderState.clearDate() }) {
+                                    Icon(imageVector = Icons.Default.Close, contentDescription = "clear")
+                                }
+                            }
+
+                            // access the date user have chosen.
+                            // if no date is selected it will be null.
+                            calenderState.chosenDate?.let { date ->
+                                Text(text = "${date.year}/${date.month}/${date.day}")
+                            } ?: Text(text = "تاریخی انتخاب نشده است", Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
                         }
                     }
                 }
@@ -56,9 +72,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-data class PersianDate(
-    val year: Int,
-    val month: Int,
-    val day: Int
-)

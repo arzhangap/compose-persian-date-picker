@@ -22,4 +22,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "PersianCalander"
 include(":app")
- 
+include(":compose-persian-date")

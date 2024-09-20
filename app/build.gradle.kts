@@ -67,5 +67,5 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    implementation("ir.huri:JalaliCalendar:1.3.3")
+    implementation(project(":compose-persian-date"))
 }
