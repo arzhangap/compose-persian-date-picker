@@ -167,7 +167,7 @@ class JalaliCalendar {
          */
 //        get() =
 
-    private val isLeap: Boolean
+    val isLeap: Boolean
         /**
          *
          * @return return whether this year is a jalali leap year
