@@ -52,6 +52,13 @@ class PersianDatePickerState internal constructor() {
     }
 }
 
+fun PersianDate?.string(
+    nullMessage: String = "تاریخی انتخاب نشده است."
+) : String {
+    return if(this != null)"$year/$month/$day"
+    else nullMessage
+}
+
 @Composable
 fun rememberPersianDatePickerState(key1: Any? = Unit) : PersianDatePickerState {
     return remember(key1) {

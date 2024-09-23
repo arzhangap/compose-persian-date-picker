@@ -23,6 +23,7 @@ import androidx.compose.ui.text.style.TextAlign
 import com.arzhangap.persiancalander.ui.theme.PersianCalanderTheme
 import com.github.arzhangap.compose_persian_date.core.PersianDatePicker
 import com.github.arzhangap.compose_persian_date.util.state.rememberPersianDatePickerState
+import com.github.arzhangap.compose_persian_date.util.state.string
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,9 +62,7 @@ class MainActivity : ComponentActivity() {
 
                             // access the date user have chosen.
                             // if no date is selected it will be null.
-                            calenderState.chosenDate?.let { date ->
-                                Text(text = "${date.year}/${date.month}/${date.day}")
-                            } ?: Text(text = "تاریخی انتخاب نشده است", Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
+                           Text(text = calenderState.chosenDate.string() , textAlign = TextAlign.Center)
                         }
                     }
                 }
