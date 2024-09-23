@@ -49,7 +49,6 @@ import com.github.arzhangap.compose_persian_date.util.toJalali
 import com.github.arzhangap.compose_persian_date.util.toPersianDate
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MonthDaysSlider(
     persianDatePickerState: PersianDatePickerState,
