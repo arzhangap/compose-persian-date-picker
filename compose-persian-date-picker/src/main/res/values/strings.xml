@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="today">امروز</string>
+    <string name="cancel">انصراف</string>
+    <string name="confirm">تایید</string>
+    <string name="pick_the_year">انتخاب سال</string>
+</resources>

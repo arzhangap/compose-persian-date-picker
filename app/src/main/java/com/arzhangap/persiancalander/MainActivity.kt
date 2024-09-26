@@ -21,9 +21,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import com.arzhangap.persiancalander.ui.theme.PersianCalanderTheme
-import com.github.arzhangap.compose_persian_date.core.PersianDatePicker
-import com.github.arzhangap.compose_persian_date.util.state.rememberPersianDatePickerState
-import com.github.arzhangap.compose_persian_date.util.state.string
+import com.arzhangap.compose_persian_date_picker.core.PersianDatePicker
+import com.arzhangap.compose_persian_date_picker.util.state.rememberPersianDatePickerState
+import com.arzhangap.compose_persian_date_picker.util.state.string
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
