@@ -51,15 +51,16 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
 
-    afterEvaluate {
-        publishing {
-            publications {
-                create<MavenPublication>("maven") {
-                    from (components["release"])
-                    groupId = "com.github.arzhangap"
-                    artifactId = "compose-persian-date-picker"
-                    version = "1.0.0"
+    // Publishing to Jitpack
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                afterEvaluate {
+                    from(components["release"])
                 }
+                groupId = "com.github.arzhangap"
+                artifactId = "compose-persian-date-picker"
+                version = "1.0.0"
             }
         }
     }
