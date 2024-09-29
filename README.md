@@ -1,4 +1,5 @@
 # Compose Persian Date Picker
+[![fa](https://img.shields.io/badge/lang-farsi-green.svg)](https://github.com/arzhangap/compose-persian-date-picker/blob/master/README.fa.md)  
 
 `Compose Persian Date Picker` is an android library that allows developers to easily add a Jalali Date Picker to their apps.
 
