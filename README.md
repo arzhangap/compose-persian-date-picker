@@ -40,7 +40,7 @@ for settings.gradle:
 
 ```kts
     dependencies {
-            implementation("")
+            implementation("com.github.arzhangap:compose-persian-date-picker:1.0.0")
     } 
 ```
 
