@@ -79,10 +79,7 @@ fun PersianDatePicker(
 ) {
     val dismissRequestAndClose = {
         onDismissRequest()
-        persianDatePickerState.toggleDialog()
-        if(persianDatePickerState.chosenDate==null) {
-            persianDatePickerState.setDateToToday()
-        }
+        persianDatePickerState.dismissTasks()
     }
 
     if (persianDatePickerState.isDialogOpen) {
@@ -100,9 +97,9 @@ fun PersianDatePicker(
                         persianDatePickerState = persianDatePickerState,
                         onDismissRequest = dismissRequestAndClose,
                         onConfirmation = {
-                            persianDatePickerState.chosenDate = it
-                            persianDatePickerState.toggleDialog()
-                            onConfirmation(it)
+                            onConfirmation(
+                                persianDatePickerState.confirmationTasks(it)
+                            )
                         },
                         headerBackgroundColor = headerBackgroundColor,
                         textColor = textColor,

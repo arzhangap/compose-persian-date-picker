@@ -50,6 +50,16 @@ class PersianDatePickerState internal constructor() {
             chosenDate = null
         }
     }
+    fun dismissTasks() {
+        currentDate = chosenDate.toJalali()
+        toggleDialog()
+    }
+    fun confirmationTasks(date: PersianDate) : PersianDate {
+        chosenDate = date
+        currentDate = chosenDate.toJalali()
+        toggleDialog()
+        return date
+    }
 }
 
 fun PersianDate?.string(
