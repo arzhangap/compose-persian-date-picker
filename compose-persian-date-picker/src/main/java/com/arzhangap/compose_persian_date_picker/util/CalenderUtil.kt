@@ -21,8 +21,8 @@ fun dateToMonthOffset(range: IntRange, monthOffset: Int): JalaliCalendar {
 fun JalaliCalendar.toPersianDate() : PersianDate {
     return PersianDate(year, month, day)
 }
-fun PersianDate.toJalali() : JalaliCalendar {
-    return JalaliCalendar(year, month, day)
+fun PersianDate?.toJalali() : JalaliCalendar {
+    return if (this != null) JalaliCalendar(year, month, day) else JalaliCalendar()
 }
 
 fun Int.formatNumberToPersian(): String {

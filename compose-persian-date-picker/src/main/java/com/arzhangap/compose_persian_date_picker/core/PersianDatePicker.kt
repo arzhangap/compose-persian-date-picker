@@ -1,5 +1,6 @@
 package com.arzhangap.compose_persian_date_picker.core
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -48,6 +49,7 @@ import com.arzhangap.compose_persian_date_picker.util.state.PersianDatePickerSta
  * @param onConfirmation Called when confirm button is clicked and returns selected Date.
  * @param onDismissRequest Called when user closes Dialog.
  * @param dialogColor Background color of the dialog.
+ * @param headerBackgroundColor Background color of the header of dialog.
  * @param textColor Color of the text.
  * @param dayIconColor Color of day icon button.
  * @param selectedDayIconColor Color of selected day (month, year) circular icon.
@@ -65,6 +67,7 @@ fun PersianDatePicker(
     onConfirmation: (PersianDate) -> Unit = {},
     onDismissRequest: () -> Unit = {},
     dialogColor: Color = MaterialTheme.colorScheme.surfaceContainer,
+    headerBackgroundColor: Color = Color.Unspecified,
     textColor: Color = MaterialTheme.colorScheme.onSurface,
     dayIconColor: Color = Color.Transparent,
     selectedDayIconColor: Color = MaterialTheme.colorScheme.primary,
@@ -77,6 +80,9 @@ fun PersianDatePicker(
     val dismissRequestAndClose = {
         onDismissRequest()
         persianDatePickerState.toggleDialog()
+        if(persianDatePickerState.chosenDate==null) {
+            persianDatePickerState.setDateToToday()
+        }
     }
 
     if (persianDatePickerState.isDialogOpen) {
@@ -98,6 +104,7 @@ fun PersianDatePicker(
                             persianDatePickerState.toggleDialog()
                             onConfirmation(it)
                         },
+                        headerBackgroundColor = headerBackgroundColor,
                         textColor = textColor,
                         dayIconColor = dayIconColor,
                         textColorHighlight = textColorHighlight,
@@ -119,6 +126,7 @@ fun PersianDatePicker(
  * @param persianDatePickerState holds all needed states of Dialog.
  * @param onConfirmation Called when confirm button is clicked and returns selected Date.
  * @param onDismissRequest Called when user closes Dialog.
+ * @param headerBackgroundColor Background color of the header of dialog.
  * @param textColor Color of the text.
  * @param dayIconColor Color of day icon button.
  * @param selectedDayIconColor Color of selected day (month, year) circular icon.
@@ -135,6 +143,7 @@ fun PersianDatePickerContent(
     persianDatePickerState: PersianDatePickerState,
     onConfirmation: (PersianDate) -> Unit,
     onDismissRequest: () -> Unit,
+    headerBackgroundColor: Color,
     textColor: Color,
     dayIconColor: Color,
     selectedDayIconColor: Color,
@@ -167,6 +176,7 @@ fun PersianDatePickerContent(
             onYearClicked = {
                 pickerType = if (pickerType != PickerType.YEAR) PickerType.YEAR else PickerType.DAY
             },
+            headerBackgroundColor = headerBackgroundColor,
             headerTextColor = actionBtnTextColor
         )
         HorizontalDivider()
@@ -227,10 +237,11 @@ fun DateHeader(
     headerDate: JalaliCalendar,
     onMonthClicked: () -> Unit,
     onYearClicked: () -> Unit,
+    headerBackgroundColor: Color,
     headerTextColor: Color,
 ) {
     Row(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth().background(headerBackgroundColor),
         horizontalArrangement = Arrangement.Center
     ) {
         TextButton(onClick = onYearClicked, modifier = Modifier.weight(1f)) {
