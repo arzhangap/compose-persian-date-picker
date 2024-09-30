@@ -6,6 +6,8 @@
 ## Give a Star! ⭐
 If you like or are using this project to learn or start your solution, please give it a star. Thanks!
 
+<img src="https://github.com/user-attachments/assets/e7fcb14b-a40b-46b5-98cb-69921f16967e" alt="Alt Text" width="350" />
+
 ## Features
 - Easy integration with Jetpack Compose.
 - Lightweight and efficient.
