@@ -29,7 +29,7 @@
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        // خط زیر
+        // following line | خط زیر
         maven { url =  uri("https://jitpack.io") }
     }
 }
@@ -48,13 +48,13 @@ dependencyResolutionManagement {
 ## استفاده 
 
 ```kotlin
-   // وضعیت تاریخ‌گیر را با کد زیر دنبال کنید.
+   // State | وضعیت تاریخ‌گیر را با کد زیر دنبال کنید.
    val datePickerState = rememberPersianDatePickerState()
 
-   // وضعیت را به کامپوزبل ارائه کنید
+   // Consume | وضعیت را به کامپوزبل ارائه کنید
    PersianDatePicker(persianDatePickerState = datePickerState)
 
-  // با استفاده از این تابع صفحه را باز کنید یا ببندید
+  // Open/Close Dialog | با استفاده از این تابع صفحه را باز کنید یا ببندید
   Button(onClick = { datePickerState.toggleDialog()}) {
         Text(text = "Open")
   }
@@ -65,6 +65,7 @@ dependencyResolutionManagement {
     // استفاده کنید
     // در صورت انتخاب نشدن تاریخ متن پیش فرض نمایش داده می شود
     // متن پیش فرض را می‌توانید در پارامتر تابع تغییر دهید
+// Get formatted String
    Text(text = calenderState.chosenDate.string())
 ```
 
